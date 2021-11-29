@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Travelers.com : Blogs de globetrotters{% endblock %}
+
+{% block css %}
+<link href="/css/home.index.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row pt-2">
+        <div class="col-12 col-lg-8">
+            <div class="row">
+                {% for category in categories %}
+                    <div class="col-12 col-lg-4">
+                        <div class="card category_card ml-1 mb-2" onclick="window.location='categories/{{ category.id }}/{{ category.title }}'">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div class="category_globe">
+                                        <img src="/img/{{ category.iconPath }}" class="img-fluid" alt="En {{ category.title }}">
+                                    </div>
+                                    <div>
+                                        <h5 class="card-title">{{ category.title }}</h5>
+                                        <p class="card-text">
+                                            {# <small class="text-muted">
+                                                Dernier article : 
+                                                {{ category.getLastPublishedArticle() ? 
+                                                        category.getLastPublishedArticle().getPublishedDateString() ?? 'Aucun' : 'Aucun'}}
+                                            </small> #}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="category_landscape">
+                                <img src="/img/{{ category.imagePath }}" class="card-img-bottom" alt="En {{ category.title }}">
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-12 col-lg-4 order-first order-lg-last">
+            <h4>Derniers Articles</h4>
+            {# {% for article in articles %}
+                <div class="card article pb-2 mb-2" onclick="window.location='/article/{{ article.id }}/{{ article.title }}'">
+                    <div class="card-body overflow-hidden">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="card-title">{{ article.title }}</h5>
+                            <span>Le {{ article.getPublishedDateString() }} par <a href="#">{{article.userProfil.pseudo}}</a></span>
+                            <span>
+                                <img src="/img/{{ article.getCategory().iconPath }}" class="img-fluid" alt="En {{ article.getCategory().title }}">
+                                {{ article.getCategory().title }}
+                            </span>
+                        </div>
+                        <p class="card-text ">
+                            {% if article.textContent|length > 200 %}
+                                {{ article.textContent|slice(0, 200) ~ '...'}}
+                            {% else %}
+                                {{ article.textContent }}
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            {% endfor %} #}
+        </div> 
+    </div>
+</div>
+
+{% endblock %}
+
